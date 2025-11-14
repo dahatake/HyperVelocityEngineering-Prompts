@@ -1,19 +1,19 @@
 # Hands-on
 
-We will perform Prompts for characteristic steps in entire Hypervelocity Engineering process.
+We will execute prompts for characteristic steps.
 
 # Environment Setup
 
-Here, we will use two types of Deep Research Copilots. This is to ensure that they can be used safely and securely in business operations.
+Here, we will use two Deep Research–type Copilots. This is to ensure they can be used safely and securely in business environments.
 
 * Business Engineering
 
-  * Microsoft 365 Copilot: **Researcher**
+  * Microsoft 365 Copilot: **Research Tool**
 
-    * Requires a Microsoft 365 license and an additional Microsoft 365 Copilot license.
-      [https://www.microsoft.com/en-us/microsoft-365-copilot/pricing](https://www.microsoft.com/en-us/microsoft-365-copilot/pricing)
-    * If the researcher does not appear in the Microsoft 365 Copilot Chat screen for your account, you need to **contact your administrator** to enable it.
-      [https://learn.microsoft.com/en-us/copilot/agents?toc=%2Fcopilot%2Fmicrosoft-365%2Ftoc.json&bc=%2Fcopilot%2Fmicrosoft-365%2Fbreadcrumb%2Ftoc.json](https://learn.microsoft.com/en-us/copilot/agents?toc=%2Fcopilot%2Fmicrosoft-365%2Ftoc.json&bc=%2Fcopilot%2Fmicrosoft-365%2Fbreadcrumb%2Ftoc.json)
+    * Requires Microsoft 365 license plus an additional Microsoft 365 Copilot license.
+      [https://www.microsoft.com/ja-jp/microsoft-365-copilot/pricing](https://www.microsoft.com/ja-jp/microsoft-365-copilot/pricing)
+    * If the Research Tool does not appear in the Microsoft 365 Copilot Chat screen for your account, you must **contact your administrator** to enable it.
+      [https://learn.microsoft.com/ja-jp/copilot/agents?toc=%2Fcopilot%2Fmicrosoft-365%2Ftoc.json&bc=%2Fcopilot%2Fmicrosoft-365%2Fbreadcrumb%2Ftoc.json](https://learn.microsoft.com/ja-jp/copilot/agents?toc=%2Fcopilot%2Fmicrosoft-365%2Ftoc.json&bc=%2Fcopilot%2Fmicrosoft-365%2Fbreadcrumb%2Ftoc.json)
 
 * Software Engineering
 
@@ -21,104 +21,160 @@ Here, we will use two types of Deep Research Copilots. This is to ensure that th
 
     * Requires GitHub Copilot Pro, GitHub Copilot Pro+, GitHub Copilot Business, or GitHub Copilot Enterprise plan.
       [https://docs.github.com/ja/copilot/concepts/agents/coding-agent/about-coding-agent](https://docs.github.com/ja/copilot/concepts/agents/coding-agent/about-coding-agent)
-    * If Copilot does not appear when logged into your GitHub account, you need to **contact your administrator** to enable it.
+    * If Copilot does not appear after logging into GitHub with your account, you must **contact your administrator** to enable it.
 
 * GitHub Desktop or Visual Studio Code
+  Either is fine. Use whichever tool you are accustomed to.
 
-  Either is fine. Use whichever tool you are comfortable with.
-
-  `GitHub Desktop` is used to synchronize GitHub repositories with local PC folders. Download and install it from the link below:
+  `GitHub Desktop` is used to synchronize GitHub repositories with folders on your local PC. Download and install it from the link below:
 
   [https://github.com/apps/desktop](https://github.com/apps/desktop)
 
-  Code editors such as `Visual Studio Code` can also sync GitHub repositories with local PC folders. In that case, install the `GitHub extension`.
+  Code editors like `Visual Studio Code` can also sync GitHub repositories with local PC folders. In that case, install the `GitHub extension`.
 
-# Procedure
+# Combined Batch and Interactive Processing
+
+We will combine batch-type prompts for large-scale operations and interactive prompts for deep exploration.
+
+For the amount done here, any tool would work — but please separate the tools as follows:
+
+* Batch = GitHub Copilot Coding agent
+* Interactive = GitHub Copilot Agent Mode (Plan Mode)
+
+## 1. Creating Multiple Screens – Batch Type
+
+Purpose: This prompt will be submitted to GitHub Copilot Agent Mode. It will instruct Copilot to generate two HTML screens and shared JavaScript.
+
+```text
+# Purpose
+Design a process using GitHub Copilot to generate HTML and JavaScript programs for prompt art samples, and then execute program modification, bug detection, and fix proposals through both batch-type and interactive-type prompts.
+
+## Workflow
+1. Requirements Definition
+  - HTML will have two screens (Builder screen / Analyzer screen).
+  - Shared JS to share logic between both screens.
+  - Prepare prompt sets used for generative AI (creation, diagramming, bug identification & fix proposals).
+  - Embed intentional bugs in the code (for learning purposes).
+2. Design Guidelines
+  - Builder screen: Create “prompts” from text + selection UI, draw a simple preview on Canvas, and save to LocalStorage.
+  - Analyzer screen: Load saved prompts, list/display and analyze them (but includes intentional bugs that prevent some functionality).
+  - JS will be one file (app.js) with modular structure.
+  - Bugs will be concentrated on the Analyzer side; Builder should mostly work to simplify learning.
+3. Intentional Bug Placement
+  - Bug #1 (Storage key mismatch): Saving uses `prompts`, loading uses `promptList` → nothing appears in Analyzer.
+  - Bug #2 (Button ID mismatch): Analyzer’s event registration refers to `analyzeButton` while HTML uses `analyzeBtn` → click not detected.
+4. Prompt Design
+  - Program creation prompt: A single prompt that makes Copilot generate two screens + shared JS per the specification.
+  - Batch-type prompt: Generates mass deliverables (test cases, issue tickets, log design, diagrams) in bulk.
+  - Interactive ①: Diagramming code (Mermaid) + structural explanation in Japanese.
+  - Interactive ②: From bug-report text, propose root cause, code location, fix patches, and reproduction & verification steps.
+5. Delivery & Usage Instructions
+  - First distribute the sample code and verify operation.
+  - Next, use Interactive ① for structural understanding, then Interactive ② for bug-fix exercises.
+  - Use batch-type prompts to generate large sets of deliverables and compile workshop outcomes.
+
+If the program itself or the code to be analyzed is incomplete or missing, state so explicitly and output an appropriate error message along with analysis/fix prompts.
+
+- All code examples must be output in Markdown code block format.
+- Batch-type and interactive-type must include separate explanations and example prompts.
+- Bug reports and fix proposals must be listed in specific detail.
+- Include output samples for cases where the analysis target is missing or incomplete.
+
+### Output Verbosity
+- Explanations and example prompts should be 1–2 sentences or 2 paragraphs, up to 6 lines maximum — concise but clear.
+- Provide necessary and sufficient content with strong structure and specificity.
+- Always return complete and practical responses within the specified length.
+- Even if the user gives short instructions, provide complete answers without omitting required details.
+- Do not increase length for politeness (“Do not increase length to restate politeness.”).
+```
+
+# 2. Large-Scale Batch Processing with AI First
 
 ## 1. Creating Business Requirements: Microsoft 365 Copilot
 
-* Log in to Microsoft 365 Copilot Chat.
+* Log into Microsoft 365 Copilot Chat.
 
   [https://m365.cloud.microsoft/chat](https://m365.cloud.microsoft/chat)
 
-* Open a text editor such as Notepad. It is convenient to edit and save the Prompt in a text editor before inputting it.
+* Open Notepad or another text editor.
+  It is convenient to edit and save prompts in a text editor before submitting them.
 
-* Copy the following Prompt content and paste it into the text editor.
+* Copy the following prompt and paste it into the text editor:
   [Prompt](Business-Documentation.md#step-1-事業分析ドキュメントの作成)
 
-* Add the following content **between** `Purpose` and `Guidelines`.
+* Insert the following content between `目的` (Purpose) and `ガイドライン` (Guidelines):
 
 ```text
 # Service Planning
 
-First, a “loyalty program” is a mechanism in which companies provide points or benefits based on purchases or usage to encourage customers to continue using their products or services.
+A “loyalty program” is a mechanism where a company offers points or rewards based on customer purchases or usage, encouraging customers to repeatedly use the company’s products or services.
 
-As for the *features*:
-1. Enhances customer loyalty by encouraging repeat use and building long-term relationships.  
-2. Accumulates customer data and enables personalization. Based on purchase history and behavioral data, optimal benefits can be offered to each customer.  
-3. Creates a competitive advantage in business by boosting customer loyalty through benefits and point systems, differentiating from competitors.
+Key features include:
+1. Increasing customer loyalty: Encourages repeat use and builds long-term relationships.
+2. Collecting customer data and personalization: Enables tailored rewards using purchase history and behavioral data.
+3. Competitive advantage in business: Differentiates a company by increasing customer loyalty through points or reward systems.
 
-As for the *persona*, the following customer segments may be assumed:  
-- Regular customers who frequently use the same store or brand.  
-- New customers who are particularly sensitive to points or benefits.  
-- Families who regularly use certain services or products.
+Example personas may include:
+- Frequent customers who regularly use the same store or brand.
+- New customers who are sensitive to points or rewards.
+- Families that regularly use services or products.
 
-As for the *use of generative AI*:  
-- Use natural language processing to propose personalized benefits based on interactions with customers.  
-- Use voice input or voice commands to improve operations even with fewer staff.  
-- Additionally, AI can predict the next purchase based on purchase data and automatically run optimal campaigns.
+Use of generative AI:
+- Propose personalized rewards using natural language processing from customer interactions.
+- Use voice input and commands to support smooth operations even with fewer staff.
+- Predict next purchases using purchase data and automatically deploy optimal campaigns.
 ```
 
-* Paste the edited Prompt into Microsoft 365 Copilot Chat and execute it.
+* Paste the edited prompt into Microsoft 365 Copilot Chat and execute.
 
 > [!TIP]
-> Time for coffee or tea. Copilot will take **5–10 minutes** to finish. However, you can **immediately** open a new browser tab or launch another instance to proceed to the next step.
+> Time for coffee or tea. It will take **5–10 minutes** for Copilot to finish. However, you may **immediately** open a new browser tab or a new instance and proceed to the next step.
 
-* After execution, a fairly long text will be generated. Click the `Copy response` button at the very bottom to copy the entire output. Paste that text into a text editor and save it as a **Markdown file** named `business-requirement.md` on your PC.
+* After execution, a long document will be generated. Click the `Copy response` button at the very end of the output, copy everything, and paste it into a text editor. Save it on your PC as a **Markdown file** named `business-requirement.md`.
 
 ## 2. Creating a New Repository on GitHub
 
-Log in to GitHub and create a new repository.
+Log into GitHub and create a new repository.
 
-* The repository name can be anything. For example, `hve-hol`.
-* It is recommended to set Visibility to **Private**.
+* Repository name is optional — e.g., `hve-hol`.
+* Visibility is recommended to be **Private**.
 
-## 3. Uploading Sample Requirement Definition and Documentation Files
+## 3. Uploading Sample Requirement Definition Documents
 
-Upload all folders and files under the `samples` folder into the new GitHub repository.
+Upload all folders and files inside the `samples` folder to the new GitHub repository.
 
 `samples` folder structure:
 
 ```text
 samples
- ├── .github/agents           : Custom Agent definitions for GitHub Copilot
+ ├── .github/agents           : GitHub Copilot Custom Agent definitions
  │    ├── Arch-micro-ServiceIdentify.md
  │    ├── Arch-UI-Detail
  │    └── Impl-WebAzure-UICoding
  ├── data/sample-data.json    : Sample data
- ├── docs                     : Sample requirement definitions and design documents
+ ├── docs                     : Sample requirement and design documents
  │    ├── business-requirement.md
  │    ├── domain-analytics.md
  │    └── ...
  └── .gitignore
 ```
 
-Use GitHub Desktop or Visual Studio Code to synchronize the local PC folder and the GitHub repository.
+Sync your local PC folder and GitHub repository using GitHub Desktop or Visual Studio Code.
 
-If Step 1 has already been completed, replace `business-requirement.md` with the one you created.
+If Step 1 is complete, replace `business-requirement.md` with the one you created.
 
 ## 4. Microsoft Learn MCP Server Settings
 
-Configure settings so that detailed information about C# and Microsoft Azure can be obtained from Microsoft Learn.
+Configure the system to retrieve detailed information about C# and Microsoft Azure from Microsoft Learn.
 
 > [!WARNING]
-> Please carefully review the usage conditions for the Microsoft Learn MCP Server:
-> [https://learn.microsoft.com/en-us/training/support/mcp#requirements](https://learn.microsoft.com/en-us/training/support/mcp#requirements)
+> Carefully review the usage conditions for Microsoft Learn MCP Server:
+> [https://learn.microsoft.com/ja-jp/training/support/mcp#requirements](https://learn.microsoft.com/ja-jp/training/support/mcp#requirements)
 
-* Go to the repository you created on GitHub.
+* Navigate to your GitHub repository.
 * Select the `Settings` tab.
-* From the left menu, select `Copilot` > `Coding agent`.
-* In the `MCP Conditions` section, paste the following text:
+* From the left menu, choose `Copilot` > `Coding agent`.
+* In the `MCP Conditions` section, paste the following:
 
 ```text
 {
@@ -134,21 +190,21 @@ Configure settings so that detailed information about C# and Microsoft Azure can
 
 ## 5. Microservice Modeling
 
-Referencing the sample files, send the following Prompt to the GitHub Copilot Coding agent to perform microservice modeling.
+Using the sample files as reference, submit the following prompt to GitHub Copilot Coding agent to perform microservice modeling.
 
-* Go to your GitHub repository
+* Navigate to your GitHub repository.
 
-* Select the `Issues` tab
+* Open the `Issue` tab.
 
-* Click `New issue` to create a new issue
+* Click `New issue`.
 
-* Enter the following information:
+* Enter the following into each field:
 
-  * Title: Microservice Modeling
-  * Add a description: Copy and paste the following Prompt:
+  * **Title:** マイクロサービスのモデリング (Microservice Modeling)
+  * **Description:** Paste the following:
 
   ```text
-  Please perform microservice modeling referring to the documents in {reference documents}. Save the modeling results in {output file} in Markdown format.
+  Refer to the documents listed in {Reference Documents} and perform microservice modeling. Save the modeling results in Markdown format into {Output File}.
 
   ## Reference Documents
     - docs/usecase-description.md
@@ -160,37 +216,37 @@ Referencing the sample files, send the following Prompt to the GitHub Copilot Co
 
 * Under `Assignees`, select **Copilot**.
 
-* You can select a `Custom Agent`. Choose **Arch-micro-ServiceIdentify**.
+* You will be able to select a **Custom Agent**. Choose **Arch-micro-ServiceIdentify**.
 
   ![Selecting Custom Agent](./images/assign-githubcopilot-customagent.jpg)
 
 * Click the green `Create` button.
 
 > [!TIP]
-> Time for coffee or tea. Copilot will take **5–10 minutes** to finish. However, you can **immediately** open a new browser tab or launch another instance to proceed to the next step.
+> Time for coffee or tea. It will take **5–10 minutes** for Copilot to finish, but you may **immediately** proceed to the next step in another tab.
 
 Reference:
 [https://docs.github.com/ja/copilot/how-tos/use-copilot-agents/coding-agent/create-a-pr](https://docs.github.com/ja/copilot/how-tos/use-copilot-agents/coding-agent/create-a-pr)
 
-* Display the `Pull Request` linked to the Issue and check the results. If it shows **Copilot finished work on behalf of <username>**, the task is complete.
-* If there is a `view sessions` button in the Pull Request, click it to check the details. You can see **what work Copilot performed**.
-* In the `File changed` tab, you can review created, modified, or deleted files.
-* If everything looks good, press `Ready for review`.
-* Then merge.
+* Open the Pull Request linked to the Issue and check the results. If you see **Copilot finished work on behalf of <UserName>**, the task is complete.
+* If the Pull Request shows a `view sessions` button, click it to review **how Copilot performed the work**.
+* Use the `File changed` tab to review added/modified/deleted files.
+* If satisfied, click `Ready for review`.
+* Merge the Pull Request.
 
 ## 6. Designing Azure Data Services
 
-Select Microsoft Azure data services considering the workload of each microservice.
+Select the optimal Microsoft Azure data services considering each microservice’s workload.
 
-* Create a new Issue in GitHub
+* Create a new Issue on GitHub.
 
-* Enter the following information:
+* Enter the following:
 
-  * Title: Selection of Microsoft Azure Data Services
-  * Add a description: Copy and paste the following Prompt:
+  * **Title:** Microsoft Azureのデータサービスの選定 (Selecting Azure Data Services)
+  * **Description:** Paste:
 
   ```text
-  Please select the optimal data services in Microsoft Azure, referring to the documents in {reference documents}. Save the analysis results in {output file} in Markdown format.
+  Refer to the documents listed in {Reference Documents} and select the optimal Microsoft Azure data services. Save the analysis results in Markdown format into {Output File}.
 
   ## Reference Documents
     - docs/usecase-description.md
@@ -201,27 +257,27 @@ Select Microsoft Azure data services considering the workload of each microservi
     - docs/AzureServices-data.md
   ```
 
-* Under `Assignees`, select **Copilot**.
+* Assign **Copilot**.
 
-* Choose **Impl-WebAzure-DataDesign** as the `Custom Agent`.
+* Choose Custom Agent: **Impl-WebAzure-DataDesign**.
 
-* Click the green `Create` button.
+* Click `Create`.
 
 * After Copilot completes the Pull Request, review and merge.
 
-## 7. Creating a Screen Definition Document
+## 7. Creating Screen Definition Document
 
-We will design and implement only one screen. You may do this immediately after Step 5 or Step 6.
+We will design and implement one screen. This can be done right after Step 5 or Step 6.
 
-* Create a new Issue in GitHub
+* Create a new Issue.
 
-* Enter the following information:
+* Enter:
 
-  * Title: Creating Screen Definition Document
-  * Add a description: Copy and paste the following Prompt:
+  * **Title:** 画面定義書の作成 (Screen Definition Document)
+  * **Description:** Paste:
 
   ```text
-  Please create the screen definition document for the screen specified in {target screen}, referring to the documents in {reference documents}. Use data from {sample data file} within the screen. Save the screen definition document in {output file} in Markdown format.
+  Refer to the documents listed in {Reference Documents} and create the screen definition document specified in {Target Screen}. Use the data from {Sample Data File} in the screen. Save the screen definition document in Markdown format into {Output File}.
 
   ## Target Screen
     - SCR-006-001: Portal Screen
@@ -240,25 +296,25 @@ We will design and implement only one screen. You may do this immediately after 
 
 * Assign **Copilot**.
 
-* Choose **Arch-UI-Detail** as the Custom Agent.
+* Choose Custom Agent: **Arch-UI-Detail**.
 
-* Click the green `Create` button.
+* Click `Create`.
 
-* After Copilot completes the Pull Request, review and merge.
+* Review and merge the Pull Request after completion.
 
 ## 8. Screen Coding
 
-Perform screen coding based on the screen definition created in Step 7.
+Code the screen based on the screen definition document created in Step 7.
 
-* Create a new Issue in GitHub
+* Create a new Issue.
 
-* Enter the following information:
+* Enter:
 
-  * Title: Web Screen Implementation
-  * Add a description: Copy and paste the following Prompt:
+  * **Title:** Web画面の実装 (Web Screen Implementation)
+  * **Description:** Paste:
 
   ```text
-  Please create the Web screen code specified in {target screen}, referring to the documents in {reference documents}. Use data from {sample data file} within the screen. Save the created code in {output folder}.
+  Refer to the documents listed in {Reference Documents} and implement the Web screen specified in {Target Screen}. Use the data from {Sample Data File} within the screen. Save the created code into {Output Folder}.
 
   ## Target Screen
     - docs/UI-SCR-006-001.md
@@ -277,15 +333,14 @@ Perform screen coding based on the screen definition created in Step 7.
 
 * Assign **Copilot**.
 
-* Choose **Arch-UI-Detail** as the Custom Agent.
+* Choose Custom Agent: **Arch-UI-Detail**.
 
-* Click the green `Create` button.
+* Click `Create`.
 
-* After Copilot completes the Pull Request, review and merge.
+* Review and merge the Pull Request after completion.
 
-## 8. Operation Check
+## 8. Operation Verification
 
-The screen created is HTML only. You can download it locally and display it in a web browser.
+The created screen is HTML only. Download it locally and open it in a web browser.
 
-For everything else, only documentation is created. Please check the content on GitHub.
-
+Other outputs are documents only. Check them on GitHub.
