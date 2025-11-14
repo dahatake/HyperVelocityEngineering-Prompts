@@ -43,7 +43,9 @@ For the amount done here, any tool would work — but please separate the tools 
 
 ## 1. Creating Multiple Screens – Batch Type
 
-Purpose: This prompt will be submitted to GitHub Copilot Agent Mode. It will instruct Copilot to generate two HTML screens and shared JavaScript.
+From this prompt, we will generate the hands-on sample code and the prompts. 
+The generated text will be used as **the hands-on material**. Please read it carefully and proceed with the hands-on.
+
 
 ```text
 # Purpose
